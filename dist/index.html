@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lots of Rectangles</title>
+    <style>
+        #root {
+            display: grid;
+            grid-template-columns: repeat(283, 1fr);
+            grid-template-rows: repeat(283, 1fr);
+        }
+        #root > div {
+            min-width: 1px;
+            min-height: 1px;
+        }
+        html, body, #root {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="root" />
+<script>
+    const root = document.getElementById('root');
+    const fragment = document.createDocumentFragment();
+    const pregeneratedColours = Array.from({length: 100}, () => `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`);
+
+    for (let i = 0; i < 80_000; i++) {
+        const div = document.createElement('div');
+        div.style.backgroundColor = pregeneratedColours[Math.floor(Math.random() * pregeneratedColours.length)];
+        fragment.appendChild(div);
+    }
+    root.appendChild(fragment);
+    // Optional animation loop
+    // const animationLoop = () => {
+    //     for (let i = 0; i < Math.floor(root.children.length/2); i++) {
+    //         const div = root.children[Math.floor(Math.random() * root.children.length)];
+    //         div.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    //     }
+    //     requestAnimationFrame(animationLoop);
+    // };
+    // animationLoop();
+</script>
+</body>
+</html>
